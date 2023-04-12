@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
@@ -7,67 +6,77 @@ public class Main {
         String nome;
         String gmail;
         int num;
-
-        public Contato(String nome, String gmail, int num) {
-            this.nome = nome;
-            this.gmail = gmail;
-            this.num = num;
-        }
     }
 
-    static ArrayList<Contato> contatos = new ArrayList<>();
-
-    public static void Menu () {
+    public static String Menu(){
         Scanner sc = new Scanner(System.in);
         String select;
 
         System.out.print("Selecione abaixo protocolo que deseja realizar:\n" +
-                "1º) Adicionar novo contato;\n" +
-                "2º) Visualizar lista completa;\n" +
-                "3º) Buscar;\n" +
-                "4º) Deletar contato;\n" + // Add a semicolon after "Deletar contato"
-                "5º) Finalizar;\n"); // Add a semicolon after "Finalizar"
+                "1º) Adicionar: Incluir novo contato;\n" +
+                "2º) Imprimir: Visualizar lista completa de contatos;\n" +
+                "3º) Sair: Finalizar programa;\n" +
+                "RESPOSTA: ");
         select = sc.nextLine();
 
-        if (select.equalsIgnoreCase("1")) {
-            Adicionar();
+        if (select.equalsIgnoreCase("adicionar")){
+            System.out.print("\nFunção ativada - Adicionar();\n");
+            return "1";
         }
-        else if (select.equalsIgnoreCase("2")) {
-            Listar();
+        else if (select.equalsIgnoreCase("imprimir")){
+            System.out.print("\nFunção ativada - Imprimir();\n");
+            return "2";
         }
-        else if (select.equalsIgnoreCase("3")) {
-            Buscar();
+        else if (select.equalsIgnoreCase("sair")){
+            System.out.print("\nAgenda finalizada.");
+            return "0";
         }
-        else if (select.equalsIgnoreCase("4")) {
-            Deletar();
-        }
-        else if (select.equalsIgnoreCase("5")) {
-            System.out.println("Programa finalizado.");
-        }
-        else{
-            System.out.print("Infelizmente o valor informado é inválido, repita o procedimento.");
-            Menu();
+        else {
+            System.out.print("Valor inválido, tente novamente. \n");
+            return Menu();
         }
     }
 
-    public static void Adicionar() {
+    public static Contato[] Adicionar (Contato[] list, int i){
         Scanner sc = new Scanner(System.in);
+        Contato c = new Contato ();
 
         System.out.print("Insira o nome do contato: ");
-        String nome = sc.nextLine();
+         c.nome = sc.nextLine();
         System.out.print("Insira o email do contato: ");
-        String email = sc.nextLine();
+        c.gmail = sc.nextLine();
         System.out.print("Insira o número do contato: ");
-        int num = sc.nextInt();
-        sc.nextLine();
-        Contato c = new Contato(nome, email, num);
-        contatos.add(c);
-        System.out.println("Contato adicionado com sucesso!");
+        c.num = sc.nextInt();
+        list[i] = c;
+
+        System.out.println("Contato adicionado com sucesso!\n");
+        return list;
     }
 
-    public static void main(String[] args) {
-        System.out.println("Bem vindo a lista de contatos da aniecoi, por favor, insira o seu primeiro contato.");
-        Adicionar();
-        Menu();
+    public static void Imprimir (Contato[] list, int i){
+        System.out.print("Funcionando\n\n");
+    }
+
+    public static void main (String[] args) {
+        Contato lista_matriz[] = new Contato[10];
+        int i = 0;
+
+        System.out.print("AGENDA TELEFÔNICA\n\n");
+        String select = Menu();
+
+        while (select != "0") {
+            if (select == "1") {
+
+                lista_matriz = Adicionar(lista_matriz, i);
+                i++;
+                select = Menu();
+
+            }
+            else if (select == "2") {
+                Imprimir(lista_matriz, i);
+                select = Menu();
+            }
+        }
     }
 }
+
