@@ -1,97 +1,124 @@
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
 
-    public static Scanner sc;
     public static class Contato {
         String nome;
         String mail;
-        int num;
-
-        public Contato(String nome, String email, int celular) {
-            this.nome = nome;
-            this.mail = email;
-            this.num = celular;
-        }
+        int numero;
     }
 
-    public static ArrayList<Contato> listaDeContatos = new ArrayList<>();
-
-    public static void Menu () {
+    public static String Menu(){
+        Scanner sc = new Scanner(System.in);
         String select;
 
-        System.out.print("Selecione abaixo protocolo que deseja realizar:\n" +
-                "1º) Adicionar novo contato;\n" +
-                "2º) Visualizar lista completa;\n" +
-                "3º) Buscar;\n" +
-                "4º) Deletar contato;\n" + // Add a semicolon after "Deletar contato"
-                "5º) Finalizar;\n"); // Add a semicolon after "Finalizar"
+        System.out.print("\n\nSelecione abaixo protocolo que deseja realizar:\n" +
+                "1º) Adicionar: Incluir novo contato;\n" +
+                "2º) Imprimir: Visualizar lista completa de contatos;\n" +
+                "3º) Buscar: Procurar um contato;\n" +
+                "4º) Sair: Finalizar programa;\n" +
+                "RESPOSTA: ");
         select = sc.nextLine();
 
-        if (select.equalsIgnoreCase("1")) {
-            Adicionar();
+        if (select.equalsIgnoreCase("adicionar")){
+            System.out.println("\nFunção ativada - Adicionar();\n");
+            return "1";
         }
-        else if (select.equalsIgnoreCase("2")) {
-            Listar();
+        else if (select.equalsIgnoreCase("imprimir")){
+            System.out.println("\nFunção ativada - Imprimir();\n");
+            return "2";
         }
-        else if (select.equalsIgnoreCase("3")) {
-            Buscar();
+        else if (select.equalsIgnoreCase("buscar")){
+            System.out.println("\nFunção ativada - Buscar();\n");
+            return "3";
         }
-        else if (select.equalsIgnoreCase("4")) {
-            Deletar();
+        else if (select.equalsIgnoreCase("sair")){
+            System.out.println("\nAgenda finalizada.");
+            return "0";
         }
-        else if (select.equalsIgnoreCase("5")) {
-            System.out.println("Programa finalizado.");
-        }
-        else{
-            System.out.print("Infelizmente o valor informado é inválido, repita o procedimento.");
-            Menu();
-        }
-    }
-
-    public static void buscar(){
-        System.out.println("Digite o nome do contato que está procurando: ");
-        String aux = sc.next();
-
-        if(listaDeContatos.size()>0){
-
-                if(listaDeContatos.contains(aux)){
-                    System.out.printf("O contato existe!\n NOME: \nCELULAR: \n EMAIL: ",);
-                }
-
-
-        }
-        else{
-            System.out.println("A lista está vazia! ");
+        else {
+            System.out.print("Valor inválido, tente novamente. \n");
+            return Menu();
         }
     }
 
-    public static void Adicionar() {
+    public static Contato[] Adicionar (Contato[] list, int quant_contatos){
         Scanner sc = new Scanner(System.in);
+        Contato c = new Contato ();
 
         System.out.print("Insira o nome do contato: ");
-        String nome = sc.nextLine();
-
+         c.nome = sc.nextLine();
         System.out.print("Insira o email do contato: ");
-        String email = sc.nextLine();
-
+        c.mail = sc.nextLine();
         System.out.print("Insira o número do contato: ");
-        int num = sc.nextInt();
-        sc.nextLine();
+        c.numero = sc.nextInt();
+        list[quant_contatos] = c;
 
-        Contato c = new Contato(nome, email, num);
+        System.out.println("Contato adicionado com sucesso!\n");
+        return list;
+    }
 
-        listaDeContatos.add(c);
+    public static void Imprimir (Contato[] list, int quant_contatos){
+        System.out.print("Funcionando\n\n");
+    }
 
-        System.out.println("Contato adicionado com sucesso!");
+    public static int buscarContato(Contato list[], int quant_contatos){
+        Scanner sc = new Scanner(System.in);
+        boolean tester = false;
+
+        if(quant_contatos==0){
+            System.out.println("A lista ainda está vazia! ");
+            return -1;
+        }
+
+        else{
+            System.out.println("Digite o nome do contato cujo deseja buscar: ");
+            String nomeBuscar = sc.next();
+
+            for(int i=0; i<quant_contatos; i++){
+                if(nomeBuscar.equalsIgnoreCase(list[i].nome)){
+                    System.out.printf("O contato existe!\nNome: %s\nEmail: %s\nNumero: %d", list[i].nome, list[i].mail, list[i].numero);
+                    tester = true;
+                    return i;
+
+                }
+
+            }
+
+            if(tester == false){
+                System.out.println("O contato buscado não existe ou ainda não foi adcionado");
+                return -1;
+            }
+        }
+
+        return -1;
 
     }
 
-    
-    public static void main(String[] args) {
-        System.out.println("Bem vindo a lista de contatos da aniecoi, por favor, insira o seu primeiro contato.");
-        Adicionar();
-        Menu();
+    public static void main (String[] args) {
+        int indice_contatos = 0;
+        int TAM = 10;
+        Contato lista_matriz[] = new Contato[TAM];
+        
+        System.out.print("AGENDA TELEFÔNICA\n\n");
+        String select = Menu();
+
+        while (select != "0") {
+            if (select == "1") {
+
+                lista_matriz = Adicionar(lista_matriz, indice_contatos);
+                indice_contatos++;
+                select = Menu();
+
+            }
+            else if (select == "2") {
+                Imprimir(lista_matriz, indice_contatos);
+                select = Menu();
+            }
+            else if(select == "3"){
+                buscarContato(lista_matriz, indice_contatos);
+                select = Menu();
+            }
+        }
     }
 }
