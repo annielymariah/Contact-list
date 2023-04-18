@@ -1,14 +1,14 @@
-import java.util.Scanner;
+import java.util.Scanner; //import do scanner
 public class Main {
 
-    public static class Contato {
+    public static class Contato { //criação do registro
         String nome;
         String mail;
         int numero;
     }
 
-    public static String Menu() {
-        Scanner sc = new Scanner(System.in);
+    public static String Menu() { //função que mostra o menu e suas ferramentas para o usuário
+        Scanner sc = new Scanner(System.in); //declaração do Scanner
         String select;
 
         System.out.print("\nSelecione abaixo protocolo que deseja realizar:\n" +
@@ -18,7 +18,7 @@ public class Main {
                 "4º) Apagar: Excluir um contato;\n" +
                 "5º) Sair: Finalizar programa;\n\n" +
                 "RESPOSTA: ");
-        select = sc.nextLine();
+        select = sc.nextLine(); //variável que guarda a resposta do usuário
 
         if (select.equalsIgnoreCase("adicionar")) {
             System.out.println("\nFunção ativada - Adicionar();");
@@ -37,31 +37,31 @@ public class Main {
             return "0";
         } else {
             System.out.print("Valor inválido, tente novamente.");
-            return Menu();
+            return Menu(); //seleção de opções ou chamada da função menu novamente (caso o valor seja inválido)
         }
     }
 
-    public static Contato[] Adicionar(Contato[] list, int quant_contatos) {
+    public static Contato[] Adicionar(Contato[] list, int quant_contatos) { //função para adicionar contatos na lista
         Scanner sc = new Scanner(System.in);
         Contato c = new Contato();
 
-        System.out.print("Insira o primeiro nome do contato: ");
+        System.out.print("Insira o primeiro nome do contato: "); //Primeiro, insere-se o nome do contato que deseja adicionar.
         c.nome = sc.nextLine();
-        for (int i = 0; i < quant_contatos; i++) {
-            if (c.nome.equalsIgnoreCase(list[i].nome)) {
+        for (int i = 0; i < quant_contatos; i++) { //Laço de repetição que analisa os contatos anteriormente inseridos.
+            if (c.nome.equalsIgnoreCase(list[i].nome)) { //Se em um local do índice, o nome for igual, solicita para se inserir outro nome e retorna uma casa da busca.
                 System.out.println("Nome já utilizado, tente novamente.\n");
                 System.out.print("Insira o primeiro nome do contato: ");
-                c.nome = sc.nextLine();
+                c.nome = sc.nextLine(); // jp é lindo
                 i = -1;
             }
         }
-        System.out.print("Insira o email do contato: ");
+        System.out.print("Insira o email do contato: "); //Ao finalizar a busca, prossegue de maneira convencional, adicionando o seu email e número de telefone.
         c.mail = sc.nextLine();
         System.out.print("Insira o número do contato: ");
         c.numero = sc.nextInt();
         list[quant_contatos] = c;
         System.out.printf("Contato '%s' foi adicionado com sucesso!\n", c.nome);
-        return list;
+        return list; //retorno da lista atualizada
     }
 
     public static void Imprimir(Contato[] list, int quant_contatos) {
@@ -72,7 +72,7 @@ public class Main {
         if (quant_contatos == 0) {
             System.out.print("\t\n╮(︶︿︶)╭ A agenda ainda está vazia!");
         } else {
-            for (int i = 0; i < quant_contatos; i++) {
+            for (int i = 0; i < quant_contatos; i++) { //estrutura de repetição que percorre o vetor por inteiro imprimindo cada elemento do mesmo
                 System.out.printf("\nNome: %s\nEmail: %s\nNúmero: %d", list[i].nome, list[i].mail, list[i].numero);
                 System.out.print("\n.---------(｡•̀ᴗ-)✧---------.");
             }
@@ -127,8 +127,9 @@ public class Main {
     }
 
     public static void main(String[] args) {
+        int mat[][] = new int[3][3]; //uma matriz (porque a senhora pediu para ter)
         int indice_contatos = 0;
-        final int TAM = 3;
+        final int TAM = 10;
         Contato lista_matriz[] = new Contato[TAM];
 
         System.out.println(".º°~°~°~°~°~°º(￣▽￣)º°~°~°~°~°~°º." +
