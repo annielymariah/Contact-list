@@ -137,25 +137,25 @@ public class Main {
                 ".º°~°~°~°~°~°º(─‿‿─)º°~°~°~°~°~°º.");
         int select = Menu();
 
-        while (!select.equals(0)) {
+        while (select != 0) {
 
-            if (select.equals(1)) {
+            if (select == 1) {
                 lista_matriz = Adicionar(lista_matriz, indice_contatos);
                 indice_contatos++;
                 select = Menu();
             }
 
-            else if (select.equals(2)) {
+            else if (select == 2) {
                 Imprimir(lista_matriz, indice_contatos);
                 select = Menu();
             }
 
-            else if (select.equals(3)) {
+            else if (select == 3) {
                 BuscarContato(lista_matriz, indice_contatos);
                 select = Menu();
             }
 
-            else if (select.equals(4)) {
+            else if (select == 4) {
                 lista_matriz = RemoverContato(lista_matriz, indice_contatos, TAM);
                 indice_contatos--;
                 select = Menu();
