@@ -7,7 +7,7 @@ public class Main {
         int numero;
     }
 
-    public static String Menu() { //função que mostra o menu e suas ferramentas para o usuário
+    public static int Menu() { //função que mostra o menu e suas ferramentas para o usuário
         Scanner sc = new Scanner(System.in); //declaração do Scanner
         String select;
 
@@ -22,19 +22,19 @@ public class Main {
 
         if (select.equalsIgnoreCase("adicionar")) {
             System.out.println("\nFunção ativada - Adicionar();");
-            return "1";
+            return 1;
         } else if (select.equalsIgnoreCase("imprimir")) {
             System.out.println("\nFunção ativada - Imprimir();");
-            return "2";
+            return 2;
         } else if (select.equalsIgnoreCase("buscar")) {
             System.out.println("\nFunção ativada - Buscar();");
-            return "3";
+            return 3;
         } else if (select.equalsIgnoreCase("apagar")) {
             System.out.println("\nFunção ativada - Apagar();");
-            return "4";
+            return 4;
         } else if (select.equalsIgnoreCase("sair")) {
             System.out.println("\nAgenda finalizada.");
-            return "0";
+            return 0;
         } else {
             System.out.print("Valor inválido, tente novamente.");
             return Menu(); //seleção de opções ou chamada da função menu novamente (caso o valor seja inválido)
@@ -135,27 +135,27 @@ public class Main {
         System.out.println(".º°~°~°~°~°~°º(￣▽￣)º°~°~°~°~°~°º." +
                 "\nAGENDA TELEFÔNICA: ROBÔ DO NUBANCOS\n" +
                 ".º°~°~°~°~°~°º(─‿‿─)º°~°~°~°~°~°º.");
-        String select = Menu();
+        int select = Menu();
 
-        while (!select.equals("0")) {
+        while (!select.equals(0)) {
 
-            if (select.equals("1")) {
+            if (select.equals(1)) {
                 lista_matriz = Adicionar(lista_matriz, indice_contatos);
                 indice_contatos++;
                 select = Menu();
             }
 
-            else if (select.equals("2")) {
+            else if (select.equals(2)) {
                 Imprimir(lista_matriz, indice_contatos);
                 select = Menu();
             }
 
-            else if (select.equals("3")) {
+            else if (select.equals(3)) {
                 BuscarContato(lista_matriz, indice_contatos);
                 select = Menu();
             }
 
-            else if (select.equals("4")) {
+            else if (select.equals(4)) {
                 lista_matriz = RemoverContato(lista_matriz, indice_contatos, TAM);
                 indice_contatos--;
                 select = Menu();
