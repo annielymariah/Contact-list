@@ -15,31 +15,27 @@ public class Main {
                 "\n1º) Adicionar: Incluir novo contato;\n" +
                 "2º) Imprimir: Visualizar lista completa de contatos;\n" +
                 "3º) Buscar: Procurar um contato;\n" +
-                "4º) Sair: Finalizar programa;\n\n" +
+                "4º) Apagar: Excluir um contato;\n" +
+                "5º) Sair: Finalizar programa;\n\n" +
                 "RESPOSTA: ");
         select = sc.nextLine();
 
         if (select.equalsIgnoreCase("adicionar")) {
-            System.out.println("\nFunção ativada - Adicionar();\n");
+            System.out.println("\nFunção ativada - Adicionar();");
             return "1";
-        }
-
-        else if (select.equalsIgnoreCase("imprimir")) {
-            System.out.println("\nFunção ativada - Imprimir();\n");
+        } else if (select.equalsIgnoreCase("imprimir")) {
+            System.out.println("\nFunção ativada - Imprimir();");
             return "2";
-        }
-
-        else if (select.equalsIgnoreCase("buscar")) {
-            System.out.println("\nFunção ativada - Buscar();\n");
+        } else if (select.equalsIgnoreCase("buscar")) {
+            System.out.println("\nFunção ativada - Buscar();");
             return "3";
-        }
-
-        else if (select.equalsIgnoreCase("sair")) {
+        } else if (select.equalsIgnoreCase("apagar")) {
+            System.out.println("\nFunção ativada - Apagar();");
+            return "4";
+        } else if (select.equalsIgnoreCase("sair")) {
             System.out.println("\nAgenda finalizada.");
             return "0";
-        }
-
-        else {
+        } else {
             System.out.print("Valor inválido, tente novamente.");
             return Menu();
         }
@@ -75,9 +71,7 @@ public class Main {
 
         if (quant_contatos == 0) {
             System.out.print("\t\n╮(︶︿︶)╭ A agenda ainda está vazia!");
-        }
-
-        else {
+        } else {
             for (int i = 0; i < quant_contatos; i++) {
                 System.out.printf("\nNome: %s\nEmail: %s\nNúmero: %d", list[i].nome, list[i].mail, list[i].numero);
                 System.out.print("\n.---------(｡•̀ᴗ-)✧---------.");
@@ -85,16 +79,13 @@ public class Main {
         }
     }
 
-    public static int BuscarContato(Contato list[], int quant_contatos) {
+    public static void BuscarContato(Contato[] list, int quant_contatos) {
         Scanner sc = new Scanner(System.in);
         boolean buscar = false;
 
         if (quant_contatos == 0) {
             System.out.print("\t\n╮(︶︿︶)╭ A agenda ainda está vazia!");
-            return -1;
-        }
-
-        else {
+        } else {
             System.out.print("Digite o nome do contato cujo deseja buscar: ");
             String nomeBuscar = sc.next();
 
@@ -102,41 +93,71 @@ public class Main {
                 if (nomeBuscar.equalsIgnoreCase(list[i].nome)) {
                     System.out.printf("\nNome: %s\nEmail: %s\nNumero: %d", list[i].nome, list[i].mail, list[i].numero);
                     buscar = true;
-                    return i;
+                    return;
                 }
             }
             if (buscar == false) {
                 System.out.println("O contato buscado não está armazenado em nosso sistema.");
             }
         }
-        return -1;
+    }
+
+    public static Contato[] RemoverContato(Contato[] list, int quant_contatos, int tama) {
+        Contato[] new_list = new Contato[tama - 1];
+        int j = 0;
+        String name;
+        Scanner sc = new Scanner(System.in);
+
+        if (quant_contatos == 0) {
+            System.out.print("\t\n╮(︶︿︶)╭ A agenda ainda está vazia!");
+        }
+        else {
+            System.out.print("Digite o nome que será removido: ");
+            name = sc.nextLine();
+
+            for (int i = 0; i < quant_contatos; i++) {
+                if (!name.equalsIgnoreCase(list[i].nome)) {
+                    new_list[j] = list[i];
+                    j++;
+                }
+            }
+            System.out.print("\nO contato foi removido da lista com sucesso.");
+        }
+        return new_list;
     }
 
     public static void main(String[] args) {
         int indice_contatos = 0;
-        int TAM = 10;
+        final int TAM = 3;
         Contato lista_matriz[] = new Contato[TAM];
 
-        System.out.print(".º°~°~°~°~°~°º(￣▽￣)º°~°~°~°~°~°º." +
+        System.out.println(".º°~°~°~°~°~°º(￣▽￣)º°~°~°~°~°~°º." +
                 "\nAGENDA TELEFÔNICA: ROBÔ DO NUBANCOS\n" +
                 ".º°~°~°~°~°~°º(─‿‿─)º°~°~°~°~°~°º.");
         String select = Menu();
 
-        while (select != "0") {
+        while (!select.equals("0")) {
 
-            if (select == "1") {
+            if (select.equals("1")) {
                 lista_matriz = Adicionar(lista_matriz, indice_contatos);
                 indice_contatos++;
                 select = Menu();
             }
 
-            else if (select == "2") {
+            else if (select.equals("2")) {
                 Imprimir(lista_matriz, indice_contatos);
                 select = Menu();
             }
 
-            else if (select == "3") {
+            else if (select.equals("3")) {
                 BuscarContato(lista_matriz, indice_contatos);
+                select = Menu();
+            }
+
+            else if (select.equals("4")) {
+                lista_matriz = RemoverContato(lista_matriz, indice_contatos, TAM);
+                indice_contatos--;
+                select = Menu();
             }
         }
     }
