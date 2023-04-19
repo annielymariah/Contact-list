@@ -163,7 +163,7 @@ public class Main {
                 if (indice_contatos>0){ //estrutura de decisão que diminui a quantidade contatos (evitando deixar ela negativa)
                     indice_contatos--;
                 }
-                select = Menu(); //lal
+                select = Menu(); 
             }
         }
     }
