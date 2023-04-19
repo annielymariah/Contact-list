@@ -51,7 +51,7 @@ public class Main {
             if (c.nome.equalsIgnoreCase(list[i].nome)) { //Se em um local do índice, o nome for igual, solicita para se inserir outro nome e retorna uma casa da busca.
                 System.out.println("Nome já utilizado, tente novamente.\n");
                 System.out.print("Insira o primeiro nome do contato: ");
-                c.nome = sc.nextLine(); // jp é lindo
+                c.nome = sc.nextLine();
                 i = -1;
             }
         }
