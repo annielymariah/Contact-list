@@ -160,7 +160,7 @@ public class Main {
             else if (select.equals("4")) {
                 lista_matriz = RemoverContato(lista_matriz, indice_contatos); //depois que a função retornar a nova lista, ela irá substituir a atual (assim como na função Adicionar)
                 if (indice_contatos>0){ //estrutura de decisão que diminui a quantidade contatos (evitando deixar ela negativa)
-                    indice_contatos--;
+                    indice_contatos--;//alalala
                 }
                 select = Menu();
             }
