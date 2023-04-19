@@ -121,7 +121,7 @@ public class Main {
                 if (!name.equalsIgnoreCase(list[i].nome)) { //a lógica é simples, tudo o que mão for o nome digitado será impresso na nova lista que atualizará a lista padrão do programa
                     new_list[j] = list[i]; //copiando os elementos que não foram excluídos
                     j++;
-                } //caso haja 2 nomes iguais, usar esse método talvez gere alguns erros
+                } 
             }
             System.out.print("\nO contato foi removido da lista com sucesso.");
         }
