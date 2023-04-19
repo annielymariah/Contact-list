@@ -114,7 +114,7 @@ public class Main {
         else {
             new_list = new Contato[quant_contatos - 1]; //atualizando o tamanho da nova lista
             System.out.print("Digite o nome que será removido: ");
-            name = sc.nextLine();
+            name = sc.nextLine(); //nome do item que será comparado e removido
 
             for (int i = 0; i < quant_contatos; i++) {
                 if (!name.equalsIgnoreCase(list[i].nome)) { //a lógica é simples, tudo o que mão for o nome digitado será impresso na nova lista que atualizará a lista padrão do programa
