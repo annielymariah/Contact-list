@@ -6,7 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="c111044a-e778-496c-a602-94a8b49a0137" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,12 +59,20 @@
       <option name="project" value="LOCAL" />
       <updated>1681853047893</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Mais comentários no código e correção de um bug na parte de deletar">
+      <created>1681869945230</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1681869945230</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="adição de comentários no código" />
     <MESSAGE value="Adição de comentários no código" />
-    <option name="LAST_COMMIT_MESSAGE" value="Adição de comentários no código" />
+    <MESSAGE value="Mais comentários no código e correção de um bug na parte de deletar" />
+    <option name="LAST_COMMIT_MESSAGE" value="Mais comentários no código e correção de um bug na parte de deletar" />
   </component>
 </project>
