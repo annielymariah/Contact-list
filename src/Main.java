@@ -79,7 +79,7 @@ public class Main {
         }
     }
 
-    public static void BuscarContato(Contato[] list, int quant_contatos) {
+    public static int BuscarContato(Contato[] list, int quant_contatos) {
         Scanner sc = new Scanner(System.in);
         boolean buscar = false;
 
@@ -93,13 +93,14 @@ public class Main {
                 if (nomeBuscar.equalsIgnoreCase(list[i].nome)) {
                     System.out.printf("\nNome: %s\nEmail: %s\nNumero: %d", list[i].nome, list[i].mail, list[i].numero);
                     buscar = true;
-                    return;
+                    return i;
                 }
             }
-            if (buscar == false) { //tu pode por !buscar (é a mesma coisa)
+            if (!buscar) {
                 System.out.println("O contato buscado não está armazenado em nosso sistema.");
             }
         }
+        return -1;
     }
 
     public static Contato[] RemoverContato(Contato[] list, int quant_contatos) { //função para remover um contato da lista
@@ -162,7 +163,7 @@ public class Main {
                 if (indice_contatos>0){ //estrutura de decisão que diminui a quantidade contatos (evitando deixar ela negativa)
                     indice_contatos--;
                 }
-                select = Menu();
+                select = Menu(); //lal
             }
         }
     }
