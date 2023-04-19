@@ -7,7 +7,7 @@ public class Main {
         int numero;
     }
 
-    public static int Menu() { //função que mostra o menu e suas ferramentas para o usuário
+    public static String Menu() { //função que mostra o menu e suas ferramentas para o usuário
         Scanner sc = new Scanner(System.in); //declaração do Scanner
         String select;
 
@@ -22,19 +22,19 @@ public class Main {
 
         if (select.equalsIgnoreCase("adicionar")) {
             System.out.println("\nFunção ativada - Adicionar();");
-            return 1;
+            return "1";
         } else if (select.equalsIgnoreCase("imprimir")) {
             System.out.println("\nFunção ativada - Imprimir();");
-            return 2;
+            return "2";
         } else if (select.equalsIgnoreCase("buscar")) {
             System.out.println("\nFunção ativada - Buscar();");
-            return 3;
+            return "3";
         } else if (select.equalsIgnoreCase("apagar")) {
             System.out.println("\nFunção ativada - Apagar();");
-            return 4;
+            return "4";
         } else if (select.equalsIgnoreCase("sair")) {
             System.out.println("\nAgenda finalizada.");
-            return 0;
+            return "0"; //essa opção em específico irá encerrar o programa
         } else {
             System.out.print("Valor inválido, tente novamente.");
             return Menu(); //seleção de opções ou chamada da função menu novamente (caso o valor seja inválido)
@@ -64,7 +64,7 @@ public class Main {
         return list; //retorno da lista atualizada
     }
 
-    public static void Imprimir(Contato[] list, int quant_contatos) {
+    public static void Imprimir(Contato[] list, int quant_contatos) { //função para imprimir a lista de contatos
         System.out.println(".º°~°~°~°~°~°º(・人・)º°~°~°~°~°~°º." +
                 "\nLISTA DE CONTATOS: ROBÔ DO NUBANCOS\n" +
                 ".º°~°~°~°~°~°º('ノωヽ)º°~°~°~°~°~°º.");
@@ -96,30 +96,31 @@ public class Main {
                     return;
                 }
             }
-            if (buscar == false) {
+            if (buscar == false) { //tu pode por !buscar (é a mesma coisa)
                 System.out.println("O contato buscado não está armazenado em nosso sistema.");
             }
         }
     }
 
-    public static Contato[] RemoverContato(Contato[] list, int quant_contatos, int tama) {
-        Contato[] new_list = new Contato[tama - 1];
+    public static Contato[] RemoverContato(Contato[] list, int quant_contatos) { //função para remover um contato da lista
         int j = 0;
         String name;
         Scanner sc = new Scanner(System.in);
 
+        Contato[] new_list = new Contato[0]; //declaração de uma nova lista utilizada no método de exclusão
         if (quant_contatos == 0) {
-            System.out.print("\t\n╮(︶︿︶)╭ A agenda ainda está vazia!");
+            System.out.print("\t\n╮(︶︿︶)╭ A agenda ainda está vazia!"); //verificação em caso da lista estar vazia
         }
         else {
+            new_list = new Contato[quant_contatos - 1]; //atualizando o tamanho da nova lista
             System.out.print("Digite o nome que será removido: ");
             name = sc.nextLine();
 
             for (int i = 0; i < quant_contatos; i++) {
-                if (!name.equalsIgnoreCase(list[i].nome)) {
-                    new_list[j] = list[i];
+                if (!name.equalsIgnoreCase(list[i].nome)) { //a lógica é simples, tudo o que mão for o nome digitado será impresso na nova lista que atualizará a lista padrão do programa
+                    new_list[j] = list[i]; //copiando os elementos que não foram excluídos
                     j++;
-                }
+                } //caso haja 2 nomes iguais, usar esse método talvez gere alguns erros
             }
             System.out.print("\nO contato foi removido da lista com sucesso.");
         }
@@ -130,34 +131,37 @@ public class Main {
         int mat[][] = new int[3][3]; //uma matriz (porque a senhora pediu para ter)
         int indice_contatos = 0;
         final int TAM = 10;
-        Contato lista_matriz[] = new Contato[TAM];
+        Contato[] lista_matriz = new Contato[TAM];
 
-        System.out.println(".º°~°~°~°~°~°º(￣▽￣)º°~°~°~°~°~°º." +
-                "\nAGENDA TELEFÔNICA: ROBÔ DO NUBANCOS\n" +
-                ".º°~°~°~°~°~°º(─‿‿─)º°~°~°~°~°~°º.");
-        int select = Menu();
+        System.out.println("""
+                .º°~°~°~°~°~°º(￣▽￣)º°~°~°~°~°~°º.
+                AGENDA TELEFÔNICA: ROBÔ DO NUBANCOS
+                .º°~°~°~°~°~°º(─‿‿─)º°~°~°~°~°~°º.""");
+        String select = Menu();
 
-        while (select != 0) {
+        while (!select.equals("0")) { //o usuário poderá editar a lista livremente até digitar "sair" na seleção de opções
 
-            if (select == 1) {
-                lista_matriz = Adicionar(lista_matriz, indice_contatos);
+            if (select.equals("1")) {
+                lista_matriz = Adicionar(lista_matriz, indice_contatos); //após o retorno, irá substituir os valores atuais da matriz
                 indice_contatos++;
+                select = Menu(); //note que todas as condicionais levam para a função menu, que permitirá o usuário continuar escolhendo as opções que deseja
+            }
+
+            else if (select.equals("2")) {
+                Imprimir(lista_matriz, indice_contatos); //chamando a função de Imprimir a lista
                 select = Menu();
             }
 
-            else if (select == 2) {
-                Imprimir(lista_matriz, indice_contatos);
-                select = Menu();
-            }
-
-            else if (select == 3) {
+            else if (select.equals("3")) {
                 BuscarContato(lista_matriz, indice_contatos);
                 select = Menu();
             }
 
-            else if (select == 4) {
-                lista_matriz = RemoverContato(lista_matriz, indice_contatos, TAM);
-                indice_contatos--;
+            else if (select.equals("4")) {
+                lista_matriz = RemoverContato(lista_matriz, indice_contatos); //depois que a função retornar a nova lista, ela irá substituir a atual (assim como na função Adicionar)
+                if (indice_contatos>0){ //estrutura de decisão que diminui a quantidade contatos (evitando deixar ela negativa)
+                    indice_contatos--;
+                }
                 select = Menu();
             }
         }
