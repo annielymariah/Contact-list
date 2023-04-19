@@ -84,19 +84,19 @@ public class Main {
         boolean buscar = false;
 
         if (quant_contatos == 0) {
-            System.out.print("\t\n╮(︶︿︶)╭ A agenda ainda está vazia!");
+            System.out.print("\t\n╮(︶︿︶)╭ A agenda ainda está vazia!"); //verificação em caso da lista estar vazia
         } else {
             System.out.print("Digite o nome do contato cujo deseja buscar: ");
             String nomeBuscar = sc.next();
 
             for (int i = 0; i < quant_contatos; i++) {
-                if (nomeBuscar.equalsIgnoreCase(list[i].nome)) {
+                if (nomeBuscar.equalsIgnoreCase(list[i].nome)) { //condicional que percorre a lista inteira até achar e imprimir o nome do contato desejado
                     System.out.printf("\nNome: %s\nEmail: %s\nNumero: %d", list[i].nome, list[i].mail, list[i].numero);
                     buscar = true;
                     return i;
                 }
             }
-            if (!buscar) {
+            if (!buscar) { //caso não seja possível, o programa irá imprimir esta mensagem
                 System.out.println("O contato buscado não está armazenado em nosso sistema.");
             }
         }
@@ -163,7 +163,7 @@ public class Main {
                 if (indice_contatos>0){ //estrutura de decisão que diminui a quantidade contatos (evitando deixar ela negativa)
                     indice_contatos--;
                 }
-                select = Menu(); 
+                select = Menu();
             }
         }
     }
